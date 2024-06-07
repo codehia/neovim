@@ -1,32 +1,3 @@
-local kind_icons = {
-  Text = '󰉿',
-  Method = '󰆧',
-  Function = '󰊕',
-  Constructor = '',
-  Field = ' ',
-  Variable = '󰀫',
-  Class = '󰠱',
-  Interface = '',
-  Module = '',
-  Property = '󰜢',
-  Unit = '󰑭',
-  Value = '󰎠',
-  Enum = '',
-  Keyword = '󰌋',
-  Snippet = '',
-  Color = '󰏘',
-  File = '󰈙',
-  Reference = '',
-  Folder = '󰉋',
-  EnumMember = '',
-  Constant = '󰏿',
-  Struct = '',
-  Event = '',
-  Operator = '󰆕',
-  TypeParameter = ' ',
-  Misc = ' ',
-}
-
 return { -- Autocompletion
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
@@ -118,6 +89,37 @@ return { -- Autocompletion
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+      },
+      window = {
+        completion = {
+          winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
+          col_offset = -3,
+          side_padding = 0,
+          border = 'rounded',
+        },
+        documentation = {
+          border = 'rounded',
+          padding = 0,
+        },
+      },
+      formatting = {
+        fields = { 'kind', 'abbr', 'menu' },
+        format = function(entry, vim_item)
+          print(vim_item, entry)
+          local kind_icons = require('lspkind').symbol_map
+          kind_icons['Copilot'] = ' '
+          vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind Source
+          vim_item.menu = ({
+            buffer = '[Buffer]',
+            nvim_lsp = '[LSP]',
+            luasnip = '[LuaSnip]',
+            nvim_lua = '[Lua]',
+            latex_symbols = '[LaTeX]',
+            copilot = '[Copilot]',
+            path = '[Path]',
+          })[entry.source.name]
+          return vim_item
+        end,
       },
       sources = {
         { name = 'nvim_lsp' },
