@@ -32,10 +32,10 @@ return {
     vim.keymap.set('n', '<leader>a', function()
       harpoon:list():add()
     end)
-    vim.keymap.set('n', '<C-a>', function()
+    vim.keymap.set('n', '<C-1>', function()
       harpoon:list():select(1)
     end)
-    vim.keymap.set('n', '<C-s>', function()
+    vim.keymap.set('n', '<C-2>', function()
       harpoon:list():select(2)
     end)
   end,

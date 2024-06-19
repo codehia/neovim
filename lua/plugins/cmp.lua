@@ -1,4 +1,5 @@
-return { -- Autocompletion
+-- Autocompletion
+return {
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
@@ -92,20 +93,15 @@ return { -- Autocompletion
       },
       window = {
         completion = {
-          winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
-          col_offset = -3,
-          side_padding = 0,
           border = 'rounded',
         },
         documentation = {
           border = 'rounded',
-          padding = 0,
         },
       },
       formatting = {
         fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
-          print(vim_item, entry)
           local kind_icons = require('lspkind').symbol_map
           kind_icons['Copilot'] = ' '
           vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind Source
