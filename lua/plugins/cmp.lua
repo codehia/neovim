@@ -32,6 +32,15 @@ return {
     luasnip.config.setup {}
 
     cmp.setup {
+      -- Disable completion in comment mode
+      enabled = function()
+        local context = require 'cmp.config.context'
+        if vim.api.nvim_get_mode().mode == 'c' then
+          return true
+        else
+          return not context.in_treesitter_capture 'comment' and not context.in_syntax_group 'Comment'
+        end
+      end,
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -57,12 +66,6 @@ return {
         --  This will auto-import if your LSP supports it.
         --  This will expand snippets if the LSP sent a snippet.
         ['<C-y>'] = cmp.mapping.confirm { select = true },
-
-        -- If you prefer more traditional completion keymaps,
-        -- you can uncomment the following lines
-        --['<CR>'] = cmp.mapping.confirm { select = true },
-        --['<Tab>'] = cmp.mapping.select_next_item(),
-        --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
         -- Manually trigger a completion from nvim-cmp.
         --  Generally you don't need this, because nvim-cmp will display
@@ -106,13 +109,13 @@ return {
           kind_icons['Copilot'] = ' '
           vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind Source
           vim_item.menu = ({
-            buffer = '[Buffer]',
             nvim_lsp = '[LSP]',
+            buffer = '[Buffer]',
             luasnip = '[LuaSnip]',
             nvim_lua = '[Lua]',
             latex_symbols = '[LaTeX]',
-            copilot = '[Copilot]',
             path = '[Path]',
+            copilot = '[Copilot]',
           })[entry.source.name]
           return vim_item
         end,

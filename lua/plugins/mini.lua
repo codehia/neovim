@@ -30,6 +30,10 @@ return { -- Collection of various small independent plugins/modules
     end
 
     local starter = require 'mini.starter'
+    starter.sections.recent_files = {
+      current_dir = true,
+      show_path = true,
+    }
     starter.setup {
       evaluate_single = true,
       header = function()
@@ -42,7 +46,6 @@ return { -- Collection of various small independent plugins/modules
 ╰─────────────────────────────────────────────────────────────────────╯
         ]]
       end,
-
       footer = function()
         return [[
                                                 o
