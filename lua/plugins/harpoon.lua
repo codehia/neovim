@@ -66,5 +66,8 @@ return {
     vim.keymap.set('n', '<leader>n', function()
       harpoon:list():next()
     end)
+    vim.keymap.set('n', '<leader>q', function()
+      harpoon.toggle_quick_menu()
+    end)
   end,
 }
