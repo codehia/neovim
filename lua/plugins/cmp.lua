@@ -35,12 +35,15 @@ return {
       -- Disable completion in comment mode
       enabled = function()
         local context = require 'cmp.config.context'
-        if vim.api.nvim_get_mode().mode == 'c' then
-          return true
-        else
-          return not context.in_treesitter_capture 'comment' and not context.in_syntax_group 'Comment'
-        end
+        local disabled = false
+        ---@diagnostic disable-next-line: deprecated
+        disabled = disabled or (vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt')
+        disabled = disabled or (vim.fn.reg_recording() ~= '')
+        disabled = disabled or (vim.fn.reg_executing() ~= '')
+        disabled = disabled or context.in_treesitter_capture 'comment'
+        return not disabled
       end,
+
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
