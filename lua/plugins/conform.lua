@@ -47,6 +47,7 @@ return { -- Autoformat
       -- Conform can also run multiple formatters sequentially
       python = { 'isort', 'autopep8' },
       bash = { 'shfmt' },
+      sql = { 'sqlformat' },
       -- You can use a sub-list to tell conform to run *until* a formatter
       -- is found.
       -- javascript = { { "prettierd", "prettier" } },
