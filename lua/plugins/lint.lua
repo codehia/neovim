@@ -10,6 +10,8 @@ return {
         python = { 'flake8' },
         bash = { 'shellcheck' },
         sql = { 'sqlfluff' },
+        haskell = { 'hlint' },
+        go = { 'golangci-lint' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
