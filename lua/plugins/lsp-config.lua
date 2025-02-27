@@ -197,6 +197,7 @@ return { -- LSP Configuration & Plugins
       gopls = {},
       hls = {},
       ts_ls = {},
+      kotlin_language_server = {},
       lua_ls = {
         settings = {
           Lua = {

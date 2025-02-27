@@ -11,7 +11,9 @@ return {
         bash = { 'shellcheck' },
         sql = { 'sqlfluff' },
         haskell = { 'hlint' },
-        go = { 'golangci-lint' },
+        go = { 'golangcilint' },
+        rust = { 'cargo', 'clippy' },
+        elixir = { 'mix' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,

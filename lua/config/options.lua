@@ -41,8 +41,14 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
+vim.opt.listchars = {
+  eol = '↲', -- End of line
+  tab = '▏·', -- Tab character (Arrow followed by a dot)
+  trail = '·', -- Trailing spaces
+  extends = '⟩', -- Character when text extends beyond the window
+  precedes = '⟨', -- Character when text precedes the window
+  nbsp = '␣', -- Non-breaking space
+}
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
@@ -55,3 +61,5 @@ vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 
 vim.wo.wrap = false
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
